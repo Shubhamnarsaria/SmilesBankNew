@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Register System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="logos/Bank Logo copy.png" alt="..." /></a>
+            <div class="d-flex" role="search">
+                <button class="btn btn-primary mx-2" type="submit" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <section class="adminclassSection">
+        <div class="container">
+            <br>
+            <u><h1 class="section-heading" style="text-align: center; font-weight: bolder;">Admin Portal</h1></u>
+            <hr><br>
+            <ul class="nav nav-tabs nav-justified mb-3 flex-column flex-sm-row" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="Rentals-tab" data-bs-toggle="tab" data-bs-target="#Rentals"
+                        type="button" role="tab" aria-controls="Rentals" aria-selected="true">Child Details<i
+                            class="fa-solid fa-car"></i></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Flights-tab" data-bs-toggle="tab" data-bs-target="#Flights"
+                        type="button" role="tab" aria-controls="Flights" aria-selected="false">Child Sign-Up<i
+                            class="fa-solid fa-plane"></i></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Railways-tab" data-bs-toggle="tab" data-bs-target="#Railways"
+                        type="button" role="tab" aria-controls="Railways" aria-selected="false">Volunteer Sign-Up<i
+                            class="fa-solid fa-train-subway"></i></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Hotals-tab" data-bs-toggle="tab" data-bs-target="#Hotals" type="button"
+                        role="tab" aria-controls="Hotals" aria-selected="false" onclick="populateTransactionTable()">Transation History<i
+                            class="fa-solid fa-hotel"></i></button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="Flights" role="tabpanel" aria-labelledby="Flights-tab">
+                    <div>
+                        <div class="row g-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <input type="text" class="form-control" id="reg-childId" placeholder="Account Number" aria-label="ChildId"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Card Balance</span>
+                                <input type="number" class="form-control" id="reg-childBalance" placeholder="Balance" aria-label="Balance"
+                                    aria-describedby="basic-addon2">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary" onclick="newchildRegister()">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Railways" role="tabpanel" aria-labelledby="Railways-tab">
+                    <div>
+                        <div class="row g-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Role</span>
+                                <select class="form-control" id="reg-role" placeholder="Role" aria-label="Role"
+                                    aria-describedby="basic-addon1">
+                                    <option selected value="volunteer">Volunteer</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2">Username</span>
+                                <input type="text" class="form-control" id="reg-email" placeholder="Username" aria-label="Email"
+                                    aria-describedby="basic-addon2">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon3">Password</span>
+                                <input type="password" class="form-control" id="reg-password" placeholder="Password" aria-label="Password"
+                                    aria-describedby="basic-addon3">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary" onclick="newuserregistration()">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Hotals" role="tabpanel" aria-labelledby="Hotals-tab">
+                    <table class="table table-striped" id="transactionTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Login User Email</th>
+                                <th scope="col">Account Number</th>
+                                <th scope="col">Debit Amount</th>
+                                <th scope="col">After Transaction Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Table rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade show active" id="Rentals" role="tabpanel" aria-labelledby="Rentals-tab">
+                    <div class="container">
+                        <u><h1 style="text-align: center; font-weight: bolder;">User Details Page!</h1></u>
+                        <hr><br>
+                        <div id="reader"></div>
+                        <br>
+                        <div class="mb-3">
+                            <label for="childId" class="form-label">Account Number</label>
+                            <input type="text" class="form-control" id="childId"
+                                placeholder="Enter Account Number to Search">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" onclick="childSearch()">Search</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div class="mb-3" id="user-info">
+                            <br><hr>
+                            <u><h1 style="text-align: center; font-weight: bolder;">User Information</h1></u>
+                            <p><strong>Account Number : </strong> <span id="user-username"></span></p>
+                            <p><strong>Card Balance : </strong> <span id="user-cBalance"></span></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                        <div id="card-info">
+                            <div class="mb-3">
+                                <input type="text" id="card-credit" class="form-control" placeholder="Credit">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary" onclick="updateCredit('addcredit')">Top-Up</button>
+                                <button type="submit" class="btn btn-primary" onclick="updateCredit('subcredit')">Deduct</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="html5-qrcode.min.js"></script>
+    <script>
+        function onScanSuccess(qrCodeMessage) {
+            document.getElementById("childId").value = qrCodeMessage;
+        }
+        function onScanError(errorMessage) {
+            //handle scan error
+        }
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 200 });
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+</body>
+
+</html>
